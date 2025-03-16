@@ -8,7 +8,7 @@
 struct ListNode* deleteMiddle(struct ListNode* head) {
     int n=0,mid;
     struct ListNode *p=head;
-    struct ListNode *temp=NULL;
+    //struct ListNode *temp=NULL;
     if(head->next==NULL)
     {
         return NULL;
@@ -27,13 +27,13 @@ struct ListNode* deleteMiddle(struct ListNode* head) {
         mid=n/2+1;
     }
     p=head;
-    for(int i=0;i<mid;i++)
+    for(int i=0;i<mid-1;i++)
     {
-        temp=p;
+        //temp=p;
         p=p->next;
     }
-    temp->next=p->next;
-    free(p);
+    p->next=p->next->next;
+    //free(p);
     return head;
 
 }

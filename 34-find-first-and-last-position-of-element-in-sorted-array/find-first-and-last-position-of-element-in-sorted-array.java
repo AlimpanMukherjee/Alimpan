@@ -38,6 +38,9 @@ class Solution {
 public int[] searchRange(int[] a, int target) {
         int first = searchfirst(a, 0, a.length - 1, target);
         int last = searchlast(a, 0, a.length - 1, target);
-        return new int[]{first, last};
+        int b[]=new int[2];
+        b[0]=first;
+        b[1]=last;
+        return b;
     }
 }

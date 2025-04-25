@@ -5,15 +5,15 @@ class Solution {
     int first=Integer.MAX_VALUE;
     for(int num:nums)
     {
-        if(num<first)
+        if(num<=first)
         {
             first=num;
         }
-        else if(num<second && num>first)
+        else if(num<=second )
         {
             second=num;
         }
-        else if(num>second)
+        else
         {
             return true;
         }

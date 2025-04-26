@@ -6,19 +6,19 @@ class Solution {
         long smallest = (long) Math.pow(10, n - 1);
 
         for (long i = largest; i >= smallest; i--) {
-            long t = isPalindrome(i);  // Even-length palindrome
+            long t = isPalindrome(i); 
             
-            // Optimized factor check
             for (long j = largest; j * j >= t; j--) {
                 if (t % j == 0 && t / j >= smallest) {
                     return (int) (t % 1337);
                 }
             }
+            
         }
         return 0;
     }
 
-    // Mirror the number to create even-length palindrome
+    
     private long isPalindrome(long a) {
         long k = a, b = a;
         while (b > 0) {

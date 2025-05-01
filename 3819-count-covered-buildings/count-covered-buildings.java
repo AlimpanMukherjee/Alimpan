@@ -25,33 +25,32 @@ class Solution {
 
         int count = 0;
 
-        // Checking each building
         for (int i = 0; i < rows.size(); i++) {  
             int rowcurr = rows.get(i);  
             int colcurr = cols.get(i);
 
-            // Ensure the building is not on the boundary
+            
             if (rowcurr > rowmin && rowcurr < rowmax && colcurr > colmin && colcurr < colmax) {
-                // Use TreeSet to check for neighbors efficiently
+                
                 boolean u = false, d = false, l = false, r = false;
 
-                // Up: is there a row < rowcurr at colcurr?
+                
                 Integer up = colToRows.get(colcurr).lower(rowcurr);
                 if (up != null) u = true;
 
-                // Down: is there a row > rowcurr at colcurr?
+                
                 Integer down = colToRows.get(colcurr).higher(rowcurr);
                 if (down != null) d = true;
 
-                // Left: is there a col < colcurr at rowcurr?
+                
                 Integer left = rowToCols.get(rowcurr).lower(colcurr);
                 if (left != null) l = true;
 
-                // Right: is there a col > colcurr at rowcurr?
+                
                 Integer right = rowToCols.get(rowcurr).higher(colcurr);
                 if (right != null) r = true;
 
-                // If building is surrounded in all 4 directions
+                
                 if (u && d && l && r) {
                     count++;
                 }

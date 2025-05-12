@@ -17,6 +17,7 @@ class Solution {
 
         while (leftstck.size() > 0 || rightstck.size() > 0) {
             // Move left-moving ants
+            t++;
             for (int i = 0; i < leftstck.size(); ) {
                 leftstck.set(i, leftstck.get(i) - 1);
                 if (leftstck.get(i) == -1) {
@@ -36,12 +37,12 @@ class Solution {
                 }
             }
 
-            // Only increment time if ants are still on the plank
-            if (leftstck.size() > 0 || rightstck.size() > 0) {
-                t++;
-            }
+            //Only increment time if ants are still on the plank
+            // if (leftstck.size() > 0 || rightstck.size() > 0) {
+            //     t++;
+            // }
         }
 
-        return t;
+        return t-1;
     }
 }

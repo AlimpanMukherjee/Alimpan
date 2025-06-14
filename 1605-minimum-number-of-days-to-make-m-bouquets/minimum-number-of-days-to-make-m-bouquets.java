@@ -20,19 +20,19 @@ class Solution {
     }
 
     public int minDays(int[] bloomDay, int m, int k) {
-        if (m * k > bloomDay.length) return -1;  // Ensures we have enough flowers
+        if (m * k > bloomDay.length) return -1;
 
         int low = Arrays.stream(bloomDay).min().getAsInt();
         int high = Arrays.stream(bloomDay).max().getAsInt();
-        int ans = -1;  // Initialize with an invalid default value
+        int ans = -1; 
 
         while (low <= high) {
-            int mid = low + (high - low) / 2;  // Avoid overflow
+            int mid = low + (high - low) / 2;
             if (check(bloomDay, m, k, mid)) {
-                ans = mid;  // Store valid minimum day
-                high = mid - 1;  // Search for an earlier valid day
+                ans = mid;
+                high = mid - 1;  
             } else {
-                low = mid + 1;  // Increase search range
+                low = mid + 1;
             }
         }
         return ans;

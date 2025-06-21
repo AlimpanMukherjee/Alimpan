@@ -9,7 +9,7 @@ class Solution {
 
     public void reverse(List<Integer> a, int low, int high) {
         while (low < high) {
-            int temp = a.get(low); // FIX: 'nums' -> 'a'
+            int temp = a.get(low);
             a.set(low, a.get(high));
             a.set(high, temp);
             low++;
@@ -17,11 +17,11 @@ class Solution {
         }
     }
 
-    public List<Integer> generate(List<Integer> a) {  // FIX: return type was '[]int', changed to 'List<Integer>'
-        int n = a.size();  // FIX: was 'nums.size()', but 'nums' not defined yet
+    public List<Integer> generate(List<Integer> a) {
+        int n = a.size();
         int dip_index = -1;
 
-        List<Integer> nums = new ArrayList<>(a);  // FIX: moved before size usage
+        List<Integer> nums = new ArrayList<>(a);
 
         for (int i = n - 2; i >= 0; i--) {
             if (nums.get(i) < nums.get(i + 1)) {
@@ -32,7 +32,7 @@ class Solution {
 
         if (dip_index == -1) {
             Collections.reverse(nums);
-            return nums;  // FIX: added return when reversed
+            return nums;
         }
 
         for (int i = n - 1; i > dip_index; i--) {
@@ -45,7 +45,7 @@ class Solution {
         }
 
         reverse(nums, dip_index + 1, n - 1);
-        return nums;  // FIX: return actual list, 'next' was undefined
+        return nums;
     }
 
     public List<List<Integer>> permute(int[] nums) {
@@ -54,11 +54,10 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             dummy.add(nums[i]);
         }
-        ans.add(new ArrayList<>(dummy)); // FIX: add copy, not reference
-
+        ans.add(new ArrayList<>(dummy));
         for (int i = 1; i < factorial(nums.length); i++) {
             dummy = generate(dummy);
-            ans.add(new ArrayList<>(dummy));  // FIX: add copy again to avoid reference issues
+            ans.add(new ArrayList<>(dummy));
         }
 
         return ans;

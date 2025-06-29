@@ -9,19 +9,25 @@ class Solution {
     }
 
     public int maximumPrimeDifference(int[] nums) {
-        Integer firstIndex = null;
-        Integer lastIndex = null;
+        Integer firstIndex = 0;
+        Integer lastIndex = 0;
 
         for (int i = 0; i < nums.length; i++) {
             if (isPrime(nums[i])) {
-                if (firstIndex == null) {
-                    firstIndex = i;
-                }
-                lastIndex = i;
+               firstIndex=i;
+               break;
+            }
+        }
+        for(int i=nums.length-1;i>=0;i--)
+        {
+            if(isPrime(nums[i]))
+            {
+                lastIndex=i;
+                break;
             }
         }
 
-        if (firstIndex == null) return 0; // No primes
+        //if (firstIndex == -1) return 0;
         return lastIndex - firstIndex;
     }
 }

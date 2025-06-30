@@ -6,15 +6,6 @@ class Solution {
                 if(2>last)return -1;
                 return 2;
             }
-            // for(int i=(first/2);i>=2;i--)
-            // {
-            //     if(first%i==0)
-            //     {
-            //         if(last<first/i)return -1;
-            //         return first/i;
-            //     }
-
-            // }
             for(int i=3;i*i<=first;i+=2)
             {
                 if(first%i==0)

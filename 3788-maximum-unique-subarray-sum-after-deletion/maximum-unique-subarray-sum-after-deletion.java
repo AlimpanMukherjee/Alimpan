@@ -21,22 +21,6 @@ class Solution {
             }
             return max;
         }
-        // int s = 0;
-        // int sum = Integer.MIN_VALUE;
-
-        // for (int i = 0; i < nums.length; i++) {
-        //     if (set.contains(nums[i])) {
-        //         s = nums[i];
-        //     }
-        //     else
-        //     {
-        //         set.add(nums[i]);
-        //         sum = Math.max(s + nums[i], sum);
-        //         if (s + nums[i] >= 0) s += nums[i]; 
-        //         else s = 0;
-        //     }
-        // }
-
         return sum; 
     }
 }

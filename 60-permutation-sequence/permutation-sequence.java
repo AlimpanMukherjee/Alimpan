@@ -10,9 +10,10 @@ class Solution {
             end--;
         }
     }
-    public void nextPermutation(int[] a) {
+    public void nextPermutation(int[] a,int k) {
         int n = a.length;
         int index = -1;
+        if(k==1) return;
         for (int i = n - 2; i >= 0; i--) 
         {
             if (a[i] < a[i + 1]) 
@@ -40,6 +41,7 @@ class Solution {
         a[nextGreater] = temp;
 
         reverse(a, index + 1, n);
+        nextPermutation(a,k-1);
     }
 
     public String getPermutation(int n, int k) {
@@ -49,10 +51,10 @@ class Solution {
             a[i] = i + 1;
         }
 
-        for (int i = 1; i < k; i++)
-        {
-            nextPermutation(a);
-        }
+        // for (int i = 1; i < k; i++)
+        // {
+            nextPermutation(a,k);
+        // }
         int ans=0;
         for(int i=0;i<n;i++)
         {

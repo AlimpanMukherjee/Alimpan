@@ -50,11 +50,7 @@ class Solution {
         {
             a[i] = i + 1;
         }
-
-        // for (int i = 1; i < k; i++)
-        // {
             nextPermutation(a,k);
-        // }
         int ans=0;
         for(int i=0;i<n;i++)
         {

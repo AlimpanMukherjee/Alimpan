@@ -44,7 +44,6 @@ class Solution {
         {
             System.out.println(a[i]);
         }
-        //reverse(a,index+1,n);
         return a;
     }
 }

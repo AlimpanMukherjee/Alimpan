@@ -1,18 +1,5 @@
 class Solution {
-    public void reverse(int []a,int index,int n)
-    {
-        int start=index;
-        int end=n-1;
-        while(start<=end)
-        {
-            int temp=a[start];
-            a[start]=a[end];
-            a[end]=temp;
-            start++;
-            end--;
-        }
-        return;
-    }
+   
     public int[] prevPermOpt1(int[] a) {
         int index=-1;
         int n=a.length;

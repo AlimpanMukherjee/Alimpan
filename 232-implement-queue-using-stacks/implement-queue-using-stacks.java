@@ -1,7 +1,7 @@
 import java.util.Stack;
 
 class MyQueue {
-    private Stack<Integer> st=new Stack<>();
+    Stack<Integer> st=new Stack<>();
 
     // public MyQueue() {
     //     st = new Stack<>();

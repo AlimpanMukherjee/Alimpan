@@ -3,40 +3,42 @@ import java.util.*;
 class Solution {
 
     class Pair {
-        int x, y, px, py;
+        int x, y;
 
-        Pair(int x, int y, int px, int py) {
+        Pair(int x, int y) {
             this.x = x;
             this.y = y;
-            this.px = px;
-            this.py = py;
         }
     }
-public boolean check(int[][] grid, int nx, int ny, int px, int py, int i) {
+    public boolean check(int curr, int next, int i) {
 
-    int curr = grid[px][py];
-    int next = grid[nx][ny];
-
-    // Directions:
     // 0 = UP, 1 = RIGHT, 2 = DOWN, 3 = LEFT
 
-    // Check if current cell allows movement in direction i
-    if (curr == 1 && (i != 1 && i != 3)) return false; // L-R
-    if (curr == 2 && (i != 0 && i != 2)) return false; // U-D
-    if (curr == 3 && (i != 3 && i != 2)) return false; // L-D
-    if (curr == 4 && (i != 1 && i != 2)) return false; // R-D
-    if (curr == 5 && (i != 3 && i != 0)) return false; // L-U
-    if (curr == 6 && (i != 1 && i != 0)) return false; // R-U
+    // ---- CURRENT CELL CHECK ----
+    if (curr == 1 && (i == 0 || i == 2)) return false; // L-R
+    if (curr == 2 && (i == 1 || i == 3)) return false; // U-D
+    if (curr == 3 && (i == 0 || i == 1)) return false; // L-D
+    if (curr == 4 && (i == 0 || i == 3)) return false; // R-D
+    if (curr == 5 && (i == 1 || i == 2)) return false; // L-U
+    if (curr == 6 && (i == 2 || i == 3)) return false; // R-U
 
-    // Now check if next cell allows entry from opposite direction
-    int opp = (i + 2) % 4;
+    // ---- NEXT CELL CHECK ----
 
-    if (next == 1 && (opp == 1 || opp == 3)) return true;
-    if (next == 2 && (opp == 0 || opp == 2)) return true;
-    if (next == 3 && (opp == 3 || opp == 2)) return true;
-    if (next == 4 && (opp == 1 || opp == 2)) return true;
-    if (next == 5 && (opp == 3 || opp == 0)) return true;
-    if (next == 6 && (opp == 1 || opp == 0)) return true;
+    if (i == 0) { // UP → next must allow DOWN
+        return (next == 2 || next == 3 || next == 4);
+    }
+
+    if (i == 1) { // RIGHT → next must allow LEFT
+        return (next == 1 || next == 3 || next == 5);
+    }
+
+    if (i == 2) { // DOWN → next must allow UP
+        return (next == 2 || next == 5 || next == 6);
+    }
+
+    if (i == 3) { // LEFT → next must allow RIGHT
+        return (next == 1 || next == 4 || next == 6);
+    }
 
     return false;
 }
@@ -47,7 +49,7 @@ public boolean check(int[][] grid, int nx, int ny, int px, int py, int i) {
         int[][] explored = new int[n][m];
 
         Queue<Pair> q = new LinkedList<>();
-        q.offer(new Pair(0, 0, -1, -1));
+        q.offer(new Pair(0, 0));
 
         int[][] dir = {{-1,0},{0,1},{1,0},{0,-1}};
 
@@ -65,9 +67,9 @@ public boolean check(int[][] grid, int nx, int ny, int px, int py, int i) {
                 int ny = curry + dir[i][1];
 
                 if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-
-                if (check(grid, nx, ny, currx, curry, i)) {
-                    q.offer(new Pair(nx, ny, currx, curry));
+                
+                if (check(grid[currx][curry],grid[nx][ny],i)) {
+                    q.offer(new Pair(nx, ny));
                 }
             }
         }

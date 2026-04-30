@@ -43,17 +43,18 @@ class Solution {
 
         if (dp[i][j][k] != -1) return dp[i][j][k];  // lookup BEFORE decrementing
 
-        int newK = (grid[i][j] != 0) ? k - 1 : k;   // don't mutate k
+        int newk = (grid[i][j] != 0) ? k - 1 : k;   // don't mutate k
 
-        int up   = check(grid, i - 1, j, newK, dp);
-        int left = check(grid, i, j - 1, newK, dp);
+        int up   = check(grid, i - 1, j, newk, dp);
+        int left = check(grid, i, j - 1, newk, dp);
 
-        int best = Integer.MIN_VALUE;
-        if (up   != Integer.MIN_VALUE) best = Math.max(best, up);
-        if (left != Integer.MIN_VALUE) best = Math.max(best, left);
+        
+        // if (up   != Integer.MIN_VALUE) best = Math.max(best, up);
+        // if (left != Integer.MIN_VALUE) best = Math.max(best, left);
 
-        if (best == Integer.MIN_VALUE) return dp[i][j][k] = Integer.MIN_VALUE;
-        return dp[i][j][k] = grid[i][j] + best;
+        // if (best == Integer.MIN_VALUE) return dp[i][j][k] = Integer.MIN_VALUE;
+        if(up<0 && left<0)return dp[i][j][k]=Integer.MIN_VALUE;
+        return dp[i][j][k] = grid[i][j] +Math.max(up,left);
     }
 
     public int maxPathScore(int[][] grid, int k) {

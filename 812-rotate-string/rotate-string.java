@@ -1,26 +1,29 @@
 class Solution {
     public boolean rotateString(String s, String goal) {
-
+       
         int n = s.length();
-        if (n != goal.length()) return false;
+        int m = goal.length();
+
+        if (n != m) return false;
 
         StringBuilder org = new StringBuilder(s);
 
         for (int count = 0; count < n; count++) {
 
-            // take first char
-            char first = org.charAt(0);
+            // store first character
+            char zero = org.charAt(0);
 
-            // remove first char
-            org.deleteCharAt(0);
+            for (int i = 0; i < n; i++) {
+                if (i == n - 1) {
+                    org.setCharAt(i, zero);
+                } else {
+                    org.setCharAt(i, org.charAt(i + 1));
+                }
+            }
 
-            // append it at end
-            org.append(first);
-
-            // check
-            if (org.toString().equals(goal)) return true;
+            String x = org.toString();
+            if (x.equals(goal)) return true;
         }
-
         return false;
     }
 }

@@ -17,21 +17,14 @@ class Solution {
             int front = 0;
             int back = 0;
 
-            // right
-            if (idx + i < n && flag1 == 0) {
-
-                if (arr[idx + i] < arr[idx]) {
-
-                    front = 1 + func(arr, d, n, idx + i);
-
-                } else {
+            if (idx + i < n && flag1 == 0 && arr[idx + i] < arr[idx]) {
+                front = 1 + func(arr, d, n, idx + i);
+            }
+                else {
 
                     flag1 = 1;
                 }
-            }
-
-            // left
-            if (idx - i >= 0 && flag2 == 0) {
+            if (idx - i >= 0 && flag2 == 0 ) {
 
                 if (arr[idx - i] < arr[idx]) {
 

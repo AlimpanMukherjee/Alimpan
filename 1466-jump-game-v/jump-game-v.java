@@ -24,17 +24,15 @@ class Solution {
 
                     flag1 = 1;
                 }
-            if (idx - i >= 0 && flag2 == 0 ) {
+            if (idx - i >= 0 && flag2 == 0 && arr[idx - i] < arr[idx]) 
+            {
+                back = 1 + func(arr, d, n, idx - i);
+            }
 
-                if (arr[idx - i] < arr[idx]) {
-
-                    back = 1 + func(arr, d, n, idx - i);
-
-                } else {
+                else {
 
                     flag2 = 1;
                 }
-            }
 
             steps = Math.max(steps,
                     Math.max(front, back));

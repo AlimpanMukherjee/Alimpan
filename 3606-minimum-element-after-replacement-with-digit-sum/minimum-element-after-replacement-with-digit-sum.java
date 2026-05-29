@@ -4,9 +4,8 @@ class Solution {
         int sum=0;
         while(n>0)
         {
-            int a=n%10;
+            sum+=n%10;
             n=n/10;
-            sum+=a;
         }
         return sum;
     }

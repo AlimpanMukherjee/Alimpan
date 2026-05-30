@@ -6,26 +6,14 @@ class Solution {
         int maxi=Integer.MIN_VALUE;
         for(int i=0;i<m;i++)
         {
-            if(matrix[0][i]=='0')
-            {
-                dp[0][i]=0;
-            }
-            else
-            {
-                dp[0][i]=1;
-            }
+            if(matrix[0][i]=='0') dp[0][i]=0;
+            else dp[0][i]=1;
             maxi=Math.max(maxi,dp[0][i]);
         }
         for(int i=0;i<n;i++)
         {
-            if(matrix[i][0]=='0')
-            {
-                dp[i][0]=0;
-            }
-            else
-            {
-            dp[i][0]=1;
-            }
+            if(matrix[i][0]=='0')dp[i][0]=0;            
+            else dp[i][0]=1;
             maxi=Math.max(maxi,dp[i][0]);
         }
         for(int i=1;i<n;i++)
@@ -43,15 +31,6 @@ class Solution {
                 }
             }
         }
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            {
-                System.out.println(dp[i][j]);
-            }
-            System.out.println("\n");
-        }
-        
         return maxi*maxi;
     }
 }

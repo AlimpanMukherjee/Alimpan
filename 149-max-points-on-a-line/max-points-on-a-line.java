@@ -81,7 +81,7 @@ class Solution {
                 double lhs=p.k*points[i][1];
                 double rhs=p.m*points[i][0]+p.c;
 
-                if(Math.abs(lhs-rhs)<1e-9)
+                if(Math.abs(lhs-rhs)<0.000000001)
                 {
                     cnt++;
                 }

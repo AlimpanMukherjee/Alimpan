@@ -9,30 +9,22 @@ class Pair{
         this.c=c;
         this.k=k;
     }
-
-    @Override
-    public boolean equals(Object obj)
-    {
-        if(this==obj)return true;
-        if(obj==null || getClass()!=obj.getClass())return false;
-
-        Pair p=(Pair)obj;
-
-        return Math.abs(k-p.k)<1e-9 && Math.abs(m-p.m)<1e-9 && Math.abs(c-p.c)<1e-9;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        long a=Math.round(k*1e9);
-        long b=Math.round(m*1e9);
-        long d=Math.round(c*1e9);
-
-        return Objects.hash(a,b,d);
-    }
 }
 
 class Solution {
+
+    boolean check(Pair p, HashSet<String> charset)
+    {
+        String s =
+            p.k + " " +
+            p.m + " " +
+            p.c;
+
+        if(charset.contains(s))return true;
+
+        charset.add(s);
+        return false;
+    }
 
     public int maxPoints(int[][] points) {
 
@@ -42,6 +34,7 @@ class Solution {
         int n=points.length;
 
         Set<Pair> set=new HashSet<>();
+        HashSet<String> charset=new HashSet<>();
 
         for(int i=0;i<n;i++)
         {
@@ -53,19 +46,26 @@ class Solution {
                 if(dx==0)
                 {
                     Pair p=new Pair(0,-1,points[i][0]);
-                    set.add(p);
+
+                    if(!check(p,charset))
+                        set.add(p);
                 }
                 else if(dy==0)
                 {
                     Pair p=new Pair(1,0,points[i][1]);
-                    set.add(p);
+
+                    if(!check(p,charset))
+                        set.add(p);
                 }
                 else
                 {
                     double m=dy/dx;
                     double c=points[i][1]-m*points[i][0];
+
                     Pair p=new Pair(1,m,c);
-                    set.add(p);
+
+                    if(!check(p,charset))
+                        set.add(p);
                 }
             }
         }

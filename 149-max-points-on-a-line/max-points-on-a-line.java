@@ -70,7 +70,7 @@ class Solution {
             }
         }
 
-        int maxi=2;
+        int maxi=0;
 
         for(Pair p:set)
         {

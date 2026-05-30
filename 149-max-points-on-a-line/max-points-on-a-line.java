@@ -18,9 +18,7 @@ class Pair{
 
         Pair p=(Pair)obj;
 
-        return Math.abs(k-p.k)<1e-9 &&
-               Math.abs(m-p.m)<1e-9 &&
-               Math.abs(c-p.c)<1e-9;
+        return Math.abs(k-p.k)<1e-9 && Math.abs(m-p.m)<1e-9 && Math.abs(c-p.c)<1e-9;
     }
 
     @Override
@@ -54,18 +52,20 @@ class Solution {
 
                 if(dx==0)
                 {
-                    set.add(new Pair(0,-1,points[i][0]));
+                    Pair p=new Pair(0,-1,points[i][0]);
+                    set.add(p);
                 }
                 else if(dy==0)
                 {
-                    set.add(new Pair(1,0,points[i][1]));
+                    Pair p=new Pair(1,0,points[i][1]);
+                    set.add(p);
                 }
                 else
                 {
                     double m=dy/dx;
                     double c=points[i][1]-m*points[i][0];
-
-                    set.add(new Pair(1,m,c));
+                    Pair p=new Pair(1,m,c);
+                    set.add(p);
                 }
             }
         }

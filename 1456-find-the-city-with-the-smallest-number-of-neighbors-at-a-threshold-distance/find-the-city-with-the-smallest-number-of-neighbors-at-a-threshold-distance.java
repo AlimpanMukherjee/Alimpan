@@ -10,17 +10,17 @@ class Pair{
 
 class Solution {
 
-    
-    int func(List<List<Pair>> adj,int i,int dist)
-    {
+int func(List<List<Pair>> adj,int i,int dist)
+{
     PriorityQueue<Pair> pq=
         new PriorityQueue<>((a,b)->a.wt-b.wt);
 
+    int cost[]=new int[adj.size()];
+    Arrays.fill(cost,Integer.MAX_VALUE);
+
+    cost[i]=0;
+
     pq.offer(new Pair(i,0));
-
-    int visited[]=new int[adj.size()];
-
-    int count=0;
 
     while(!pq.isEmpty())
     {
@@ -29,24 +29,31 @@ class Solution {
         int x=p.x;
         int d=p.wt;
 
-        if(visited[x]==1)continue;
-
-        visited[x]=1;
-
-        if(x!=i)count++;
+        if(d>cost[x])continue;
 
         for(Pair p1:adj.get(x))
         {
-            if(visited[p1.x]==0 && d+p1.wt<=dist)
+            if(d+p1.wt<cost[p1.x])
             {
-                pq.offer(new Pair(p1.x,d+p1.wt));
+                cost[p1.x]=d+p1.wt;
+
+                pq.offer(new Pair(p1.x,cost[p1.x]));
             }
+        }
+    }
+
+    int count=0;
+
+    for(int j=0;j<adj.size();j++)
+    {
+        if(j!=i && cost[j]<=dist)
+        {
+            count++;
         }
     }
 
     return count;
 }
-
     public int findTheCity(int n, int[][] edges, int dist) {
 
         List<List<Pair>> adj=new ArrayList<>();

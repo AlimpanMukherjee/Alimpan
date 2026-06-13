@@ -2,7 +2,7 @@ class Solution {
     public int maxDepth(String s) {
         //List<Integer> lst=new ArrayList<>();
         int count=0;
-        Stack<Character> st=new Stack<>();
+        //Stack<Character> st=new Stack<>();
         //int start=0;
         int maxi=0;
         // while(start<s.length() && s.charAt(start)!='(')
@@ -15,13 +15,13 @@ class Solution {
             {        
                 count++;
                 //lst.add(count);                
-                st.push('(');
+                //st.push('(');
             }
             else if(s.charAt(i)==')')
             {
                 //lst.add(count);
                 count--;
-                st.pop();
+                //st.pop();
             }
             maxi=Math.max(maxi,count);
         }

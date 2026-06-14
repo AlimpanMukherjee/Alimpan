@@ -16,19 +16,20 @@ class Solution {
         map.put(900,"CM");
         StringBuilder ans=new StringBuilder();
         PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
-        pq.offer(1);
-        pq.offer(5);
-        pq.offer(10);
-        pq.offer(50);
-        pq.offer(100);
-        pq.offer(500);
-        pq.offer(1000);
-        pq.offer(4);
-        pq.offer(9);
-        pq.offer(40);
-        pq.offer(90);
-        pq.offer(400);
-        pq.offer(900);
+        for(int i:map.keySet())pq.offer(i);
+        // pq.offer(1);
+        // pq.offer(5);
+        // pq.offer(10);
+        // pq.offer(50);
+        // pq.offer(100);
+        // pq.offer(500);
+        // pq.offer(1000);
+        // pq.offer(4);
+        // pq.offer(9);
+        // pq.offer(40);
+        // pq.offer(90);
+        // pq.offer(400);
+        // pq.offer(900);
         while(num>0)
         {
             int n=pq.poll();

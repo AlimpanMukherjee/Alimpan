@@ -11,10 +11,7 @@ class Solution {
             }
         }
         if(map.size()<5)return 0;
-        for(char c:map.keySet())
-        {
-            System.out.printf("%c->%d , ",c,map.get(c));
-        }
+        
         int mini=Integer.MAX_VALUE;
         for(char c:map.keySet())
         {

@@ -1,76 +1,76 @@
-class Pair {
-    int val, count;
-
-    Pair(int val, int count) {
-        this.val = val;
-        this.count = count;
+class Pair{
+    int val,count;
+    Pair(int val,int count)
+    {
+        this.val=val;
+        this.count=count;
     }
 }
-
 class Solution {
     public int snakesAndLadders(int[][] board) {
+        int n=board.length;
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int i=n-1;i>=0;i--)
+        {   int rowbottom=n-i-1;
 
-        int n = board.length;
-
-        Map<Integer, Integer> map = new HashMap<>();
-
-        int cell = 1;
-        boolean leftToRight = true;
-
-        for (int i = n - 1; i >= 0; i--) {
-
-            if (leftToRight) {
-                for (int j = 0; j < n; j++) {
-                    if (board[i][j] != -1) {
-                        map.put(cell, board[i][j]);
-                    }
-                    cell++;
+            for(int j=0;j<n;j++)
+            {
+                if(rowbottom%2==0 && board[i][j]!=-1)
+                {
+                    int start=n*(n-i-1);
+                    start+=j+1;
+                    map.put(start,board[i][j]);
                 }
-            } else {
-                for (int j = n - 1; j >= 0; j--) {
-                    if (board[i][j] != -1) {
-                        map.put(cell, board[i][j]);
-                    }
-                    cell++;
+                else if(board[i][j]!=-1)
+                {
+                    int start=n*(n-i-1);
+                    start+=n-j;
+                    map.put(start,board[i][j]);
                 }
-            }
-
-            leftToRight = !leftToRight;
+            }              
         }
+        // for(int i=n-1;i>=0;i--)
+        // {
+        //     int rowFromBottom = n - 1 - i;
 
-        Queue<Pair> q = new LinkedList<>();
-        q.offer(new Pair(1, 0));
+        //     for(int j=0;j<n;j++)
+        //     {
+        //         if(board[i][j] == -1) continue;
 
-        int[] visited = new int[n * n + 1];
-        visited[1] = 1;
+        //         int start;
 
-        while (!q.isEmpty()) {
+        //         if(rowFromBottom % 2 == 0)
+        //             start = rowFromBottom * n + j + 1;
+        //         else
+        //             start = rowFromBottom * n + (n - j);
 
-            Pair p = q.poll();
-
-            int curr = p.val;
-            int count = p.count;
-
-            if (curr == n * n)
-                return count;
-
-            for (int i = 1; i <= 6; i++) {
-
-                int newval = curr + i;
-
-                if (newval > n * n)
-                    continue;
-
-                int next = map.getOrDefault(newval, newval);
-
-                if (visited[next] == 1)
-                    continue;
-
-                visited[next] = 1;
-                q.offer(new Pair(next, count + 1));
+        //         map.put(start, board[i][j]);
+        //     }
+        // }
+        PriorityQueue<Pair> pq=new PriorityQueue<>((a,b)->a.count-b.count);
+        pq.offer(new Pair(1,0));
+        int ans=-1;
+        int visited[]=new int[(n*n)+1];
+        visited[1]=1;
+        
+        while(!pq.isEmpty())
+        {
+            int curr=pq.peek().val;
+            int count=pq.peek().count;
+            pq.poll();
+            
+            for(int i=1;i<=6;i++)
+            {
+                int newval=curr+i;
+                if(newval>n*n)continue;
+                if(map.containsKey(newval))newval=map.get(newval);
+                if(newval==n*n)return count+1;
+                if(visited[newval]==1)continue;
+                pq.offer(new Pair(newval,count+1));
+                visited[newval]=1;
             }
         }
+         return -1;
 
-        return -1;
     }
 }

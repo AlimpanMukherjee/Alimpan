@@ -29,24 +29,11 @@ class Solution {
                 }
             }              
         }
-        // for(int i=n-1;i>=0;i--)
-        // {
-        //     int rowFromBottom = n - 1 - i;
 
-        //     for(int j=0;j<n;j++)
-        //     {
-        //         if(board[i][j] == -1) continue;
-
-        //         int start;
-
-        //         if(rowFromBottom % 2 == 0)
-        //             start = rowFromBottom * n + j + 1;
-        //         else
-        //             start = rowFromBottom * n + (n - j);
-
-        //         map.put(start, board[i][j]);
-        //     }
-        // }
+        for(int i:map.keySet())
+        {
+            System.out.printf("%d->%d ",i,map.get(i));
+        }
         PriorityQueue<Pair> pq=new PriorityQueue<>((a,b)->a.count-b.count);
         pq.offer(new Pair(1,0));
         int ans=-1;

@@ -1,38 +1,42 @@
 class Solution {
     public int maximumLength(int[] nums) {
-        Map<Integer, Integer> hash = new HashMap<>();
-        
-        for (int num : nums) {
-            hash.put(num, hash.getOrDefault(num, 0) + 1);
+        Map<Integer,Integer> map=new HashMap<>();
+        int maxi=1;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(map.containsKey(nums[i]))map.put(nums[i],map.get(nums[i])+1);
+            else map.put(nums[i],1);
         }
-
-        int maxcount = 1;
-
-        for (int i = 0; i < nums.length; i++) {
-            int target = nums[i];
-            int count = 1;
-
-            if (target == 1) {
-                int ones = hash.get(1);
-                if (ones % 2 == 1) {
-                    maxcount = Math.max(maxcount, ones);
-                } else {
-                    maxcount = Math.max(maxcount, ones - 1);
+        if(map.containsKey(1))
+        {
+            int count=0;
+            count=map.get(1);
+            if(count%2==0)count--;
+            maxi=Math.max(maxi,count);
+        }
+        for(int i=0;i<nums.length;i++)
+        {
+            int num=nums[i];
+            if(map.get(num)<=1 || num==1)continue;
+            int exp=1;
+            int count=0;
+            for(int j=1;j<=Integer.MAX_VALUE;j=j*2)
+            {
+                int num1=(int)Math.pow(num,j);
+                if(map.containsKey(num1))
+                {
+                    if(map.get(num1)==1)
+                    {
+                        count++;
+                        break;
+                    }
+                    count+=2;
                 }
-                continue;
+                else break;
             }
-
-            while (hash.getOrDefault(target, 0) >= 2) {
-                if ((long) target * target > Integer.MAX_VALUE) break;
-                target = target * target;
-                count += 2;
-            }
-
-            if (hash.getOrDefault(target, 0) == 0) count -= 2;
-
-            maxcount = Math.max(maxcount, count);
+            if(count%2==0)count--;
+            maxi=Math.max(maxi,count);
         }
-
-        return maxcount;
+        return maxi;
     }
 }
